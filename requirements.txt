@@ -1,0 +1,4 @@
+flask
+flask-admin
+flask-migrate
+psycopg2
