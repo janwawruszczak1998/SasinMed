@@ -2,22 +2,24 @@
 
 ### 1 venv - w folderze głównym SasinMed
 
-```python3 -m venv venv
+```
+python3 -m venv venv
 . venv/bin/activate
 ```
 
 ### 2 flask
 
-```pip3 install flask
-pip3 install flask-admin
-pip3 install flask-migrate
+```
+pip3 install -r requirements.txt
 ```
 
 ### 3 postgreSQL
 
-```pip3 install psycopg2
+```
+pip3 install psycopg2
 sudo apt install libpq-dev
 sudo apt-get -y install postgresql
+sudo apt-get -y install postgresql-contrib
 ```
 
 Działanie na silniku bazy postawionym na postgesie
