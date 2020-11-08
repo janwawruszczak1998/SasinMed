@@ -26,3 +26,13 @@ Działanie na silniku bazy postawionym na postgesie
 
 Następnie odpalamy odpowiedni program:
 ```psql```
+
+Tworzymy lokalnie bazę danych:
+```
+CREATE DATABASE sasinmeddb;
+CREATE USER sasinmed WITH PASSWORD 'w4lepsze';
+ALTER ROLE sasinmed SET client_encoding TO 'utf8';
+ALTER ROLE sasinmed SET default_transaction_isolation TO 'read committed';
+ALTER ROLE sasinmed SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE sasinmeddb TO sasinmed;
+```
