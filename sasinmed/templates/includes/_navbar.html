@@ -6,14 +6,15 @@
         </div>
         <div class="navbar-list">
             <ul>
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-                <li><a href="{{ url_for('signup_user') }}">Sign Up</a></li>
-                <li><a href="{{ url_for('statistics') }}">Statistics</a></li>
+                {% if not 'user' in session %} 
+                <li><a href="{{ url_for('login') }}">Zaloguj</a></li>
+                <li><a href="{{ url_for('signup_user') }}">Zarejestruj</a></li>
+                {% endif %}
                 {% if 'user' in session %}
-                    <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-                    <li><a href="{{ url_for('user_funerals') }}">Funerals</a></li>
-                    <li><a href="{{ url_for('user_buried') }}">Buried</a></li>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <li><a href="{{ url_for('dashboard') }}">Dane osobowe</a></li>
+                    <li><a href="{{ url_for('user_funerals') }}">Wizyty</a></li>
+                    <li><a href="{{ url_for('user_buried') }}">Objawy</a></li>
+                    <li><a href="{{ url_for('logout') }}">Wyloguj</a></li>
                 {% endif %}
                 {% if 'admin' in session %}
                     <li><a href="/admin">Admin</a></li>

@@ -23,8 +23,6 @@ def home_page():
 @app.route('/search', methods=['GET'])
 def search():
     form = FilterForm()
-    category = str(request.args["category"])
-    phrase = str(request.args["phrase"])
     resource = request.query_string
 
     table = Visit

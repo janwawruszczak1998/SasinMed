@@ -38,19 +38,9 @@ class RegisterUserForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
-    phrase = StringField(render_kw={"placeholder": "Enter the search phrase or leave the field empty"})
     category = SelectField(render_kw={"placeholder": "Choose the category you want to search in"}, choices=[
-        ('buried', 'Buried'),
-        ('funeral', 'Funeral'),
-        ('cemetery', 'Cemetery'),
-        ('quarter', 'Quarter'),
-        ('outfit', 'Outfit'),
-        ('tombstone', 'Tombstone'),
-        ('container', 'Container'),
-        ('priest', 'Priest'),
-        ('temple', 'Temple'),
-        ('funeral_home', 'Funeral home')],
-                           validators=[InputRequired()])
+        ('Patient', 'Pacjent'),
+        ('Doctor', 'Lekarz')], validators=[InputRequired()])
 
 
 class FilterForm(FlaskForm):
@@ -75,7 +65,7 @@ class DeleteRecordForm(FlaskForm):
 
 class EditBuriedForm(AddBuriedForm):
     id = IntegerField('ID', validators=[InputRequired()])
-    symptoms = StringField('symptoms', validators=[InputRequired()])
+    symptoms = StringField('Objawy', validators=[InputRequired()])
     recommendation = StringField('recommendation', validators=[InputRequired()])
     prescribed_medication = StringField('prescribed_medication', validators=[InputRequired()])
 
