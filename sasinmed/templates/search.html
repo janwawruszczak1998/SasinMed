@@ -12,14 +12,20 @@
 
         <tr class="head-row">
             {% for column_name in column_names %}
-                <th>{{ column_name.upper().replace("_", " ") }}</th>
+                {% if not column_name == 'visible' %}
+                    <th>{{ column_name.upper().replace("_", " ") }}</th>
+                {% endif %}
             {% endfor %}
         </tr>
         {% for record in query_records %}
             <tr class="regular-row">
-                {% for column_name in column_names %}
-                    <td>{{ record[column_name] }}</td>
-                {% endfor %}
+                {% if record.visible == 'True' %}
+                    {% for column_name in column_names %}
+                        {% if not column_name == 'visible' %}
+                            <td>{{ record[column_name] }}</td>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </tr>
         {% endfor %}
     </table>

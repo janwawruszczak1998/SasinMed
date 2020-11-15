@@ -12,10 +12,9 @@
     <div class="modal-container">
         <div class="modal" id="modal-edit">
             <span class="fas fa-times btn-close-modal btn-close-edit"></span>
-            <h3>Edit record</h3>
+            <h3>Modyfikuj wizytę</h3>
             <form class="form-edit" method="POST" action="{{ url_for('user_funerals') }}">
                 {{ edit_visit_form.csrf_token }}
-                {{ edit_visit_form.id.label(class="label") }} {{ edit_visit_form.id(class="input-edit-id field") }}
                 {{ edit_visit_form.date_of_visit.label(class="label") }} {{ edit_visit_form.date_of_visit(class="input-edit-date field") }}
                 {{ edit_visit_form.time_of_visit.label(class="label") }} {{ edit_visit_form.time_of_visit(class="input-edit field") }}
                 {{ edit_visit_form.doctor.label(class="label") }} {{ edit_visit_form.doctor(class="input-edit field") }}            }
@@ -36,12 +35,12 @@
 
 
     <div class="form-box">
-    <h2>Add funeral</h2>
+    <h2>Dodaj wizytę</h2>
         <form action="{{ url_for('user_funerals') }}" method="POST">
             {{ visit_form.hidden_tag() }}
-            {{ visit_form.date_of_visit(class='date-field') }}
-            {{ visit_form.time_of_visit(class="input-edit field") }}
-            {{ visit_form.doctor(class="input-edit field") }}
+            {{ visit_form.date_of_visit(class="date-field") }}
+            {{ visit_form.time_of_visit(class="time-field") }}
+            {{ visit_form.doctor(class="doctor-field") }}
             <button type="submit" class="button">Dodaj</button>
         </form>
     </div>
@@ -50,26 +49,16 @@
     <div class="table-flex">
         <table class="filter-table">
             <tr class="head-row">
-                {% for columnn in funeral_header %}
+                {% for columnn in visit_header %}
                     <th>{{ columnn.upper().replace("_", " ") }}</th>
                 {% endfor %}
             </tr>
-            {% for fun in funerals %}
-                <tr class="regular-row" id="item-{{ fun.id }}">
+            {% for visit in visits %}
+                <tr class="regular-row" id="item-{{ visit.id }}">
                     <td><img class="btn btn-remove" src="{{ url_for('.static', filename='img/icon-remove.svg') }}" alt="Remove"></td>
-                    <td>{{ fun.id }}</td>
-                    <td>{{ fun.date }}</td>
-                    <td>{{ fun.total_price }}</td>
-                    <td>
-                        {% if fun.buried|length%}
-                            {% for bur in fun.buried %}
-                                {{ bur.first_name }} {{ bur.last_name }}
-                            {% endfor %}
-                        {% else %}
-                            brak
-                        {% endif %}
-                    </td>
-                    <td>{{ fun.priest_temple }}</td>
+                    <td>{{ visit.date_of_visit }}</td>
+                    <td>{{ visit.time_of_visit }}</td>
+                    <td>{{ visit.doctor }}</td>
                     <td><img class="btn btn-edit" src="{{ url_for('.static', filename='img/icon-edit.svg') }}" alt="Edit"></td>
                 </tr>
             {% endfor %}

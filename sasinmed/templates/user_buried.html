@@ -16,7 +16,7 @@
             <form class="form-edit" method="POST" action="{{ url_for('user_buried') }}">
                 {{ edit_diagnosis_form.csrf_token }}
                 {{ edit_diagnosis_form.id.label(class="label") }} {{ edit_diagnosis_form.id(class="input-edit-id field") }}
-                {{ edit_diagnosis_form.symptoms.label(class="label") }} {{ edit_diagnosis_form.symptoms(class="input-edit field") }}
+                {{ edit_diagnosis_form.symptoms.label(class="label") }} {{ edit_diagnosis_form.symptoms(class="symptoms-field") }}
                 {{ edit_diagnosis_form.recommendation.label(class="label") }} {{ edit_diagnosis_form.recommendation(class="input-edit field") }}
                 {{ edit_diagnosis_form.prescribed_medication.label(class="label") }} {{ edit_diagnosis_form.prescribed_medication(class="input-edit field") }}
                 <button type="submit" class="btn btn-add btn-modal-item btn-edit-item">Edytuj</button>
@@ -43,14 +43,12 @@
             </div>
         {% endfor %}
 
-        <h2>Add buried to a quarter</h2>
+        <h2>Dodaj obserwowane objawy</h2>
         <form action="{{ url_for('user_buried') }}" method="POST">
                 {{ diagnosis_form.csrf_token }}
-                {{ diagnosis_form.visit.label(class="label") }} {{ diagnosis_form.visit(class="input-edit field") }}
-                {{ diagnosis_form.symptoms.label(class="label") }} {{ diagnosis_form.symptoms(class="input-edit field") }}
-                {{ diagnosis_form.recommendation.label(class="label") }} {{ diagnosis_form.recommendation(class="input-edit field") }}
-                {{ diagnosis_form.prescribed_medication.label(class="label") }} {{ diagnosis_form.prescribed_medication(class="input-edit field") }}
-            <button class="button" type="submit">Add</button>
+                {{ diagnosis_form.visit(class="visit-field") }}
+                {{ diagnosis_form.symptoms(class="symptoms-field") }}
+            <button class="button" type="submit">Zapisz</button>
         </form>
     </div>
 
@@ -61,31 +59,25 @@
                     <th>{{ columnn.upper().replace("_", " ") }}</th>
                 {% endfor %}
             </tr>
-            {% for bur in buried %}
-                <tr class="regular-row" id="item-{{ bur.id }}">
+            {% for diag in diagnosis %}
+                <tr class="regular-row" id="item-{{ diag.id }}">
                     <td><img class="btn btn-remove" src="{{ url_for('.static', filename='img/icon-remove.svg') }}" alt="Remove"></td>
-                    <td>{{ bur.id }}</td>
-                    <td>{{ bur.first_name }}</td>
-                    <td>{{ bur.last_name }}</td>
-                    {% if bur.birth_date is not none %}
-                        <td>{{ bur.birth_date }}</td>
-                    {% else %}
-                        <td>brak</td>
-                    {% endif %}
-                    {% if bur.death_date is not none %}
-                        <td>{{ bur.death_date }}</td>
-                    {% else %}
-                        <td>brak</td>
-                    {% endif %}
-                    {% if bur.cause_of_death == '' or bur.cause_of_death is none %}
+                    <td>{{ diag.visit }}</td>
+                    {% if diag.symptoms == '' or diag.symptoms is none %}
                         <td>brak</td>
                     {% else %}
-                        <td>{{ bur.cause_of_death }}</td>
+                        <td>{{ diag.symptoms }}</td>
                     {% endif %}
-                    <td>{{ bur.quarter }}</td>
-                    <td>{{ bur.funeral }}</td>
-                    <td>{{ bur.container }}</td>
-                    <td>{{ bur.outfit }}</td>
+                    {% if diag.recommendation == '' or diag.recommendation is none %}
+                        <td>brak</td>
+                    {% else %}
+                        <td>{{ diag.recommendation }}</td>
+                    {% endif %}
+                    {% if diag.prescribed_medication == '' or diag.prescribed_medication is none %}
+                        <td>brak</td>
+                    {% else %}
+                        <td>{{ diag.prescribed_medication }}</td>
+                    {% endif %}
                     <td><img class="btn btn-edit" src="{{ url_for('.static', filename='img/icon-edit.svg') }}" alt="Edit"></td>
                 </tr>
             {% endfor %}

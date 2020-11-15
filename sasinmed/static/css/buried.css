@@ -37,22 +37,22 @@ h2, h5 {
     flex-flow: column;
 }
 
-.first-name-field, .last-name-field, .birth-field, .death-field, .cause-of-death-field {
+.symptoms-field, .recommendation-field, .prescribed-medicine-field{
     margin: 10px;
     border-radius: 15px;
-    border-color: #c4c4c4;
+    border-color: #00194e;
     padding: 5px 0;
     width: 190px;
-    background: rgba(196, 196, 196, 1);
+    background: rgb(0, 12, 184);
     color: white;
 }
 
-.quarter-field, .funeral-field, .outfit-field, .container-field, .tombstone-field {
+.visit-field, .funeral-field, .outfit-field, .container-field, .tombstone-field {
     border-radius: 15px;
-    border-color: #c4c4c4;
+    border-color: 00194e;
     padding: 5px 0;
     width: 320px;
-    background: rgba(196, 196, 196, 1);
+    background: rgb(0, 12, 184);
     color: white;
 }
 
@@ -78,16 +78,16 @@ tr {
 }
 
 tr:nth-child(even) {
-    background-color: rgba(88, 96, 99, 0.9);
+    background-color: rgba(58, 0, 194, 0.9);
 }
 
 tr:nth-child(odd) {
-    background-color: rgba(100 ,100, 100, 0.9);
+    background-color: rgba(72, 255, 255, 0.459);
 }
 
 
 tr:hover {
-    background-color: #868e8c;
+    background-color: #00c090;
 }
 
 th, td {

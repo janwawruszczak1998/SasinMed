@@ -31,12 +31,7 @@ def search():
     column_names = table.__table__.columns.keys()  # get columns visits
 
     try:
-        column_names.remove('id')  # remove visible field if present
-    except ValueError:
-        pass
-
-    try:
-        column_names.remove('visible')  # remove visible field if present
+        column_names.remove('id') 
     except ValueError:
         pass
 
@@ -71,6 +66,8 @@ def search():
 
     session['column_names'] = column_names
     session['query_records'] = query_records
+
+    print(query_records)
 
     return render_template('search.html', column_names=column_names, query_records=query_records, resource=resource,
                            form=form)
@@ -289,9 +286,9 @@ def user_buried():
             db.session.commit()
 
     diagnosis = Diagnosis.query.join(Visit).join(Patient).filter_by(name=session['username']).all()
-    diagnosis_header = ['', 'visit', 'symptoms', 'recommendation', 'prescribed_medication', '']
+    diagnosis_header = ['', 'wizyta', 'objawy', 'zalecenia', 'recepta', '']
 
-    return render_template('user_buried.html', diagnosis_form=diagnosis_form,
+    return render_template('user_buried.html', diagnosis=diagnosis, diagnosis_form=diagnosis_form,
                            diagnosis_header=diagnosis_header, delete_record_form=delete_record_form,
                            edit_diagnosis_form=edit_diagnosis_form)
 
@@ -329,7 +326,7 @@ def user_funerals():
         print('Błąd formularza')
 
     visits = Visit.query.join(Patient).filter(Patient.name == session['username']).all()
-    visit_header = ['', 'id', 'date', 'time', 'doctor', '']
+    visit_header = ['', 'data', 'godzina', 'lekarz', '']
 
     return render_template('user_funerals.html', visit_form=visit_form, visits=visits,
                            visit_header=visit_header, delete_record_form=delete_record_form,

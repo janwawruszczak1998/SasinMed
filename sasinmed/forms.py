@@ -64,9 +64,9 @@ class AddFuneralForm(FlaskForm):
     
 class AddBuriedForm(FlaskForm):
     visit = QuerySelectField('Wizyta', query_factory=lambda: Visit.query.all(), validators=[InputRequired()])
-    symptoms = StringField('Objawy')
-    recommendation = StringField('Zalecenia')
-    prescribed_medication = StringField('Recepta')
+    symptoms = StringField(render_kw={"placeholder": "Objawy"})
+    recommendation = StringField(render_kw={"placeholder": "Zalecenia"})
+    prescribed_medication = StringField(render_kw={"placeholder": "Recepta"})
 
 
 class DeleteRecordForm(FlaskForm):
