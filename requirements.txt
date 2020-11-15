@@ -1,4 +1,8 @@
 flask
 flask-admin
 flask-migrate
+flask-wtf
+flask-whooshee
+flask-bootstrap
+flask-login
 psycopg2

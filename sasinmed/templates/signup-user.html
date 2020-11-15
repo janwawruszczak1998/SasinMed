@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/signup-user.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+    <h1 class="title">WhatsDown</h1>
+    <div class="container">
+
+        {% for mess in get_flashed_messages() %}
+            <div class="flash-message" role="alert">
+                {{ mess }}
+                <span class="fas fa-times btn-close-modal btn-close-flash"></span>
+            </div>
+        {% endfor %}
+
+        <div class="form-box">
+            <form class="form-signin" method="POST" action="/signup-user">
+                {{ form.hidden_tag() }}
+                {{ form.username(class='username-field') }}
+                {{ form.password(class='password-field') }}
+                {{ form.confirm(class='confirm-field') }}
+                {{ form.name(class='name-field') }}
+                {{ form.surname(class='surname-field') }}
+                {{ form.pesel(class='pesel-field') }}
+                {{ form.age(class='age-field') }}
+                {{ form.birth_date(class='birth_date-field') }}
+                <button class="button" type="submit">Zarejestruj</button>
+            </form>
+        </div>
+    </div> <!-- /container -->
+
+{% endblock %}

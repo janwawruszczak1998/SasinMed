@@ -1,0 +1,65 @@
+.form-box {
+    width: 250px;
+    background: rgb(59, 53, 139);
+    margin: 30vh auto 0 auto;
+    padding: 30px 30px 10px 30px;
+    border-radius: 20px;
+}
+
+.title {
+    display: none;
+}
+
+.username-field, .password-field{
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 15px;
+    border-color: #5277bd;
+    width: 200px;
+    background: rgb(0, 19, 192);
+    color: white;
+}
+
+.username-field::placeholder, .password-field::placeholder{
+    color: white;
+}
+
+.button {
+    display: block;
+    padding: 10px 25px;
+    margin: 20px auto;
+    background-color: #5277bd;
+    border-radius: 10px;
+    color: white;
+}
+
+@media(max-width: 700px) {
+    .title {
+        display: block;
+        margin: 17vh auto 30px auto;
+        text-align: center;
+        font-weight: lighter;
+        font-size: 45px;
+        font-family: 'IM Fell English', serif;
+        color: white;
+        padding-bottom: 10px;
+    }
+
+    .username-field, .password-field {
+        background: rgb(59, 53, 139);
+        border-radius: 5px;
+        width: 50vw;
+    }
+
+    .form-box {
+        margin: 0 auto;
+        width: 70vw;
+        background: rgba(245, 245, 245, 1);
+    }
+
+    .button {
+        border-radius: 5px;
+        padding: 10px 35px;
+    }
+}

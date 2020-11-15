@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/search_and_filter.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    {% include 'includes/_filter_form.html' %}
+
+    <div class="table-flex">
+    <table class="filter-table">
+
+        <tr class="head-row">
+            {% for column_name in column_names %}
+                <th>{{ column_name.upper().replace("_", " ") }}</th>
+            {% endfor %}
+        </tr>
+        {% for filtered_record in filtered_records %}
+            <tr class="regular-row">
+                {% for column_name in column_names %}
+                    <td>{{ filtered_record[column_name] }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+
+
+{% endblock %}

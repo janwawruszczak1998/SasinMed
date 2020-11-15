@@ -1,0 +1,123 @@
+.table-flex {
+    display: flex;
+    flex-flow: column;
+}
+
+table {
+    width: 100%;
+    table-layout:fixed;
+    position: relative;
+    font-family: "Habibi", sherif;
+    font-size: small;
+    border-collapse: collapse;
+    margin-top: 130px;
+    color: white;
+
+}
+
+tr:nth-child(even) {
+    background-color: rgba(54, 212, 218, 0.9);
+}
+
+tr:nth-child(odd) {
+    background-color: rgba(12, 112, 151, 0.9);
+}
+
+
+tr:hover {
+    background-color: #078565;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
+ .filter-form {
+     padding: 5px 10px;
+     position: fixed;
+     top: 70px;
+     right: 0;
+     z-index: 2;
+ }
+
+
+ .filter-btn {
+     font-size: 16px;
+     font-weight: bolder;
+     margin: 10px 10px;
+     border-radius: 4px;
+     background-color: #5be4c2;
+     color: white;
+     padding: 5px;
+     cursor: pointer;
+ }
+
+
+ .filter-text {
+    width: 400px;
+    height: 25px;
+    border-radius: 4px;
+    background-color: #5fa896;
+    color: white;
+    padding: 5px;
+}
+
+.filter-text::placeholder{
+    color: white;
+}
+
+.filter-text:hover {
+    border-color: #0e1428
+ }
+
+
+ .filter-text:focus {
+     border-color: #0e1428
+ }
+
+ .filter-btn:hover {
+     border-color: #0e1428;
+ }
+
+ @media (max-width: 700px) {
+     tr {
+         display: flex;
+         flex-direction: column;
+     }
+
+     .head-row {
+         position: fixed;
+         width: 180px;
+         top: 150px;
+         left: 0;
+         z-index: 2;
+         padding-top: 8px;
+         padding-bottom: 4px;
+         border-radius: 0px;
+         background-color: rgba(51, 53, 51, 0.0);
+         opacity: 0.7;
+     }
+
+     .regular-row{
+         border-radius: 0px;
+         padding-top: 10px;
+         padding-left: 190px;
+         margin: 20px 0;
+     }
+    .filter-text {
+        width: 180px;
+    }
+
+    .filter-form {
+        padding: 5px 10px;
+        position: fixed;
+        top: 20px;
+        left: 90px;
+    }
+
+
+ }

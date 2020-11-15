@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="greeting">Welcome {{ session['username'] }}, we wish you a pleasant day!</h1>
+
+        <h2 class="edit-title">Here you can edit data of your company:</h2>
+
+        <div class="form-box">
+            <form class="form-edit" method="POST" action="{{ url_for('dashboard') }}">
+                    {{ edit_user_details.csrf_token }}
+                    {{ edit_user_details.name.label(class='label') }} {{ edit_user_details.name(value=current_user.name, class='field') }}
+                    {{ edit_user_details.surname.label(class='label') }} {{ edit_user_details.surname(value=current_user.surname, class='field') }}
+                    {{ edit_user_details.pesel.label(class='label') }} {{ edit_user_details.pesel(value=current_user.pesel, class='field') }}
+                    {{ edit_user_details.age.label(class='label') }} {{ edit_user_details.age(value=current_user.age, class='field') }}
+                    {{ edit_user_details.birth_date.label(class='label') }} {{ edit_user_details.birth_date(value=current_user.birth_date, class='field') }}
+                <button type="submit" class="button">Zatwierdź</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

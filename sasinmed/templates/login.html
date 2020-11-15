@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="title">SasinMed</h1>
+
+    {% for mess in get_flashed_messages() %}
+        <div class="flash-message" role="alert">
+            <strong>Error!</strong> {{ mess }}
+            <span class="fas fa-times btn-close-modal btn-close-flash"></span>
+        </div>
+    {% endfor %}
+
+    <div class="form-box">
+        <form class="form-login" method="POST" action="/login">
+            {{ form.hidden_tag() }}
+            {{ form.username(class='username-field')}}
+            {{ form.password(class='password-field') }}
+            <button class="button" type="submit">Log in</button>
+        </form>
+
+    </div>
+
+{% endblock %}
