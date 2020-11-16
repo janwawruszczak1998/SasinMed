@@ -4,7 +4,7 @@ const UIcontroller = (function () {
         modalEdit: '#modal-edit',
         modalDelete: '#modal-delete',
 
-        funeralsTable: '.table-flex',
+        visitsTable: '.table-flex',
 
         btnEditItem: '.btn-edit-item',
         btnDeleteItem: '.btn-delete-item',
@@ -48,7 +48,7 @@ const controller = (function (UICtrl) {
         let DOM = UICtrl.getDOMstrings();
 
         // open editing box
-        document.querySelector(DOM.funeralsTable).addEventListener('click', event => {
+        document.querySelector(DOM.visitsTable).addEventListener('click', event => {
             if (event.target.className === 'btn btn-edit') {
                 document.querySelector(DOM.modalEdit).style.display = 'block';
                 document.querySelector(DOM.modalContainer).style.display = 'block'
@@ -58,7 +58,7 @@ const controller = (function (UICtrl) {
         });
 
         // open deleting box
-        document.querySelector(DOM.funeralsTable).addEventListener('click', event => {
+        document.querySelector(DOM.visitsTable).addEventListener('click', event => {
             if (event.target.className === 'btn btn-remove') {
                 document.querySelector(DOM.modalDelete).style.display = 'block';
                 document.querySelector(DOM.modalContainer).style.display = 'block'

@@ -250,7 +250,7 @@ def dashboard():
     return render_template('dashboard.html', edit_user_details=edit_user_details, current_user=current_user)
 
 
-@app.route('/dashboard/buried', methods=['GET', 'POST'])
+@app.route('/dashboard/diagnosis', methods=['GET', 'POST'])
 @check_logged_in_user
 def user_buried():
     delete_record_form = DeleteRecordForm()
@@ -286,12 +286,12 @@ def user_buried():
     diagnosis = Diagnosis.query.join(Visit).join(Patient).filter_by(name=session['username']).all()
     diagnosis_header = ['', 'wizyta', 'objawy', 'zalecenia', 'recepta', '']
 
-    return render_template('user_buried.html', diagnosis=diagnosis, diagnosis_form=diagnosis_form,
+    return render_template('user_diagnosis.html', diagnosis=diagnosis, diagnosis_form=diagnosis_form,
                            diagnosis_header=diagnosis_header, delete_record_form=delete_record_form,
                            edit_diagnosis_form=edit_diagnosis_form)
 
 
-@app.route('/dashboard/funerals', methods=['GET', 'POST'])
+@app.route('/dashboard/visits', methods=['GET', 'POST'])
 @check_logged_in_user
 def user_funerals():
     visit_form = AddFuneralForm()
@@ -326,7 +326,7 @@ def user_funerals():
     visits = Visit.query.join(Patient).filter(Patient.name == session['username']).all()
     visit_header = ['', 'data', 'godzina', 'lekarz', '']
 
-    return render_template('user_funerals.html', visit_form=visit_form, visits=visits,
+    return render_template('user_visits.html', visit_form=visit_form, visits=visits,
                            visit_header=visit_header, delete_record_form=delete_record_form,
                            edit_visit_form=edit_visit_form)
 
