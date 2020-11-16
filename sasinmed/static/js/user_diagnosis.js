@@ -4,7 +4,7 @@ const UIcontroller = (function () {
         modalEdit: '#modal-edit',
         modalDelete: '#modal-delete',
 
-        buriedTable: '.table-flex',
+        diagnosisTable: '.table-flex',
 
         btnEditItem: '.btn-edit-item',
         btnDeleteItem: '.btn-delete-item',
@@ -12,34 +12,22 @@ const UIcontroller = (function () {
         btnCloseDelete: '.btn-close-delete',
 
         inputItemEditID: '.input-edit-id',
-        inputItemEditFirstName: '.input-edit-first-name',
-        inputItemEditLastName: '.input-edit-last-name',
-        inputItemEditBirthDate: '.input-edit-birth-date',
-        inputItemEditDeathDate: '.input-edit-death-date',
-        inputItemCauseOfDeathDate: '.input-edit-cause-of-death',
+        inputItemEditSymptoms: '.input-edit-symptoms',
 
         inputItemDeleteID: '.input-delete-id'
     };
 
     return {
         setModalBoxValues: function (event) {
-            let item, itemID, itemFirstName, itemLastName, itemBirthDate, itemDeathDate, itemCauseOfDeath;
+            let item, itemID, itemSymptoms;
 
             item = event.target.parentNode.parentNode;
             itemID = item.id.split('-')[1];
-            itemFirstName = item.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
-            itemLastName = itemFirstName.nextSibling.nextSibling;
-            itemBirthDate = itemLastName.nextSibling.nextSibling;
-            itemDeathDate = itemBirthDate.nextSibling.nextSibling;
-            itemCauseOfDeath = itemDeathDate.nextSibling.nextSibling;
+            itemSymptoms = item.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
 
             if (event.target.className === "btn btn-edit") {
                 document.querySelector(DOMstrings.inputItemEditID).value = itemID;
-                document.querySelector(DOMstrings.inputItemEditFirstName).value = itemFirstName.textContent;
-                document.querySelector(DOMstrings.inputItemEditLastName).value = itemLastName.textContent;
-                document.querySelector(DOMstrings.inputItemEditBirthDate).value = itemBirthDate.textContent;
-                document.querySelector(DOMstrings.inputItemEditDeathDate).value = itemDeathDate.textContent;
-                document.querySelector(DOMstrings.inputItemCauseOfDeathDate).value = itemCauseOfDeath.textContent;
+                document.querySelector(DOMstrings.inputItemEditSymptoms).value = itemSymptoms.textContent;
             }
 
             if (event.target.className === "btn btn-remove") {
@@ -60,7 +48,7 @@ const controller = (function (UICtrl) {
         let DOM = UICtrl.getDOMstrings();
 
         // open editing box
-        document.querySelector(DOM.buriedTable).addEventListener('click', event => {
+        document.querySelector(DOM.diagnosisTable).addEventListener('click', event => {
             if(event.target.className === 'btn btn-edit') {
                 document.querySelector(DOM.modalEdit).style.display = 'block';
                 document.querySelector(DOM.modalContainer).style.display = 'block'
@@ -70,7 +58,7 @@ const controller = (function (UICtrl) {
         });
 
         // open deleting box
-        document.querySelector(DOM.buriedTable).addEventListener('click', event => {
+        document.querySelector(DOM.diagnosisTable).addEventListener('click', event => {
             if(event.target.className === 'btn btn-remove') {
                 document.querySelector(DOM.modalDelete).style.display = 'block';
                 document.querySelector(DOM.modalContainer).style.display = 'block'

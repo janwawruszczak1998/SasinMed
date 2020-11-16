@@ -13,7 +13,7 @@
         <div class="modal" id="modal-edit">
             <span class="fas fa-times btn-close-modal btn-close-edit"></span>
             <h3>Edytuj objawy</h3>
-            <form class="form-edit" method="POST" action="{{ url_for('user_buried') }}">
+            <form class="form-edit" method="POST" action="{{ url_for('user_diagnosis') }}">
                 {{ edit_diagnosis_form.csrf_token }}
                 {{ edit_diagnosis_form.symptoms.label(class="label") }} {{ edit_diagnosis_form.symptoms(class="symptoms-field") }}
                 <button type="submit" class="btn btn-add btn-modal-item btn-edit-item">Edytuj</button>
@@ -23,7 +23,7 @@
         <div class="modal" id="modal-delete">
             <span class="fas fa-times btn-close-modal btn-close-delete"></span>
             <h3>Potwierdzenie usunięcia</h3>
-            <form method="POST" action="{{ url_for('user_buried') }}">
+            <form method="POST" action="{{ url_for('user_diagnosis') }}">
                 {{ delete_record_form.csrf_token }}
                 <button type="submit" class="btn btn-add btn-modal-item btn-delete-item">Usuń</button>
             </form>
@@ -40,7 +40,7 @@
         {% endfor %}
 
         <h2>Dodaj obserwowane objawy</h2>
-        <form action="{{ url_for('user_buried') }}" method="POST">
+        <form action="{{ url_for('user_diagnosis') }}" method="POST">
                 {{ diagnosis_form.csrf_token }}
                 {{ diagnosis_form.visit(class="visit-field") }}
                 {{ diagnosis_form.symptoms(class="symptoms-field") }}
@@ -80,5 +80,5 @@
         </table>
     </div>
 
-    <script src="{{ url_for('.static', filename='js/user_buried.js') }}"></script>
+    <script src="{{ url_for('.static', filename='js/user_diagnosis.js') }}"></script>
 {% endblock %}

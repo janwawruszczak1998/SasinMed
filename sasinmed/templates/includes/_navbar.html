@@ -12,8 +12,8 @@
                 {% endif %}
                 {% if 'user' in session %}
                     <li><a href="{{ url_for('dashboard') }}">Dane osobowe</a></li>
-                    <li><a href="{{ url_for('user_funerals') }}">Wizyty</a></li>
-                    <li><a href="{{ url_for('user_buried') }}">Objawy</a></li>
+                    <li><a href="{{ url_for('user_visits') }}">Wizyty</a></li>
+                    <li><a href="{{ url_for('user_diagnosis') }}">Objawy</a></li>
                     <li><a href="{{ url_for('logout') }}">Wyloguj</a></li>
                 {% endif %}
                 {% if 'admin' in session %}

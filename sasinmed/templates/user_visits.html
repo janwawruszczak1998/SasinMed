@@ -13,7 +13,7 @@
         <div class="modal" id="modal-edit">
             <span class="fas fa-times btn-close-modal btn-close-edit"></span>
             <h3>Modyfikuj wizytę</h3>
-            <form class="form-edit" method="POST" action="{{ url_for('user_funerals') }}">
+            <form class="form-edit" method="POST" action="{{ url_for('user_visits') }}">
                 {{ edit_visit_form.csrf_token }}
                 {{ edit_visit_form.date_of_visit.label(class="label") }} {{ edit_visit_form.date_of_visit(class="input-edit-date field") }}
                 {{ edit_visit_form.time_of_visit.label(class="label") }} {{ edit_visit_form.time_of_visit(class="input-edit field") }}
@@ -25,7 +25,7 @@
         <div class="modal" id="modal-delete">
             <span class="fas fa-times btn-close-modal btn-close-delete"></span>
             <h3>Potwierdzenie usunięcia</h3>
-            <form method="POST" action="{{ url_for('user_funerals') }}">
+            <form method="POST" action="{{ url_for('user_visits') }}">
                 {{ delete_record_form.csrf_token }}
                 <button type="submit" class="btn btn-add btn-modal-item btn-delete-item">Usuń</button>
             </form>
@@ -35,7 +35,7 @@
 
     <div class="form-box">
     <h2>Dodaj wizytę</h2>
-        <form action="{{ url_for('user_funerals') }}" method="POST">
+        <form action="{{ url_for('user_visits') }}" method="POST">
             {{ visit_form.hidden_tag() }}
             {{ visit_form.date_of_visit(class="date-field") }}
             {{ visit_form.time_of_visit(class="time-field") }}
@@ -64,6 +64,6 @@
         </table>
     </div>
 
-    <script src="{{ url_for('.static', filename='js/user_funerals.js') }}"></script>
+    <script src="{{ url_for('.static', filename='js/user_visits.js') }}"></script>
 
 {% endblock %}
