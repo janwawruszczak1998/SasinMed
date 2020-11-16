@@ -49,7 +49,7 @@ class Visit(db.Model):
     # connections:
     patient = relationship("Patient", back_populates="visit")
     doctor = relationship("Doctor", back_populates="visit")
-    diagnosis = relationship("Diagnosis", back_populates="visit", uselist=False)
+    diagnosis = relationship("Diagnosis", back_populates="visit", cascade="save-update, merge, delete")
 
 
     def __repr__(self):

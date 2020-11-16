@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask import session
 from .models import Administrator, Visit, Patient, Diagnosis, Doctor
-from wtforms import StringField, PasswordField, SelectField, BooleanField
+from wtforms import StringField, PasswordField, SelectField, BooleanField, HiddenField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import InputRequired, Optional, EqualTo
 from wtforms.fields.html5 import IntegerField, DateField, TimeField
@@ -65,10 +65,11 @@ class DeleteRecordForm(FlaskForm):
 
 class EditBuriedForm(AddBuriedForm):
     id = IntegerField('ID', validators=[InputRequired()])
-    symptoms = StringField('Objawy', validators=[InputRequired()])
-    recommendation = StringField('recommendation', validators=[InputRequired()])
-    prescribed_medication = StringField('prescribed_medication', validators=[InputRequired()])
+    symptoms = StringField(render_kw={"placeholder": "Objawy"}, validators=[InputRequired()])
+    recommendation = StringField(render_kw={"placeholder": "Zalecenia"}, validators=[InputRequired()])
+    prescribed_medication = StringField(render_kw={"placeholder": "Recepta"}, validators=[InputRequired()])
 
+ 
 
 
 class EditFuneralForm(AddFuneralForm):

@@ -13,21 +13,29 @@ const UIcontroller = (function () {
 
         inputItemEditID: '.input-edit-id',
         inputItemEditSymptoms: '.input-edit-symptoms',
+        inputItemEditRecomendation: '.input-edit-recommendation',
+        inputItemEditPrescribedMedication: '.input-edit-prescribed_medication',
+
 
         inputItemDeleteID: '.input-delete-id'
     };
 
     return {
         setModalBoxValues: function (event) {
-            let item, itemID, itemSymptoms;
+            let item, itemID, itemSymptoms, itemRecomendation, itemPrescribedMedication;
 
             item = event.target.parentNode.parentNode;
             itemID = item.id.split('-')[1];
-            itemSymptoms = item.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
+            itemSymptoms = item.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
+            itemRecomendation = itemSymptoms.nextSibling.nextSibling;
+            itemPrescribedMedication = itemRecomendation.nextSibling.nextSibling;
 
             if (event.target.className === "btn btn-edit") {
                 document.querySelector(DOMstrings.inputItemEditID).value = itemID;
                 document.querySelector(DOMstrings.inputItemEditSymptoms).value = itemSymptoms.textContent;
+                document.querySelector(DOMstrings.inputItemEditRecomendation).value = itemRecomendation.textContent;
+                document.querySelector(DOMstrings.inputItemEditPrescribedMedication).value = itemPrescribedMedication.textContent;
+
             }
 
             if (event.target.className === "btn btn-remove") {

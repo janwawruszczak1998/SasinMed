@@ -27,6 +27,7 @@
             <h3>Potwierdzenie usunięcia</h3>
             <form method="POST" action="{{ url_for('user_visits') }}">
                 {{ delete_record_form.csrf_token }}
+                {{ delete_record_form.id.label(class="label") }} {{ delete_record_form.id(class="input-delete-id field") }}
                 <button type="submit" class="btn btn-add btn-modal-item btn-delete-item">Usuń</button>
             </form>
         </div>
@@ -55,6 +56,7 @@
             {% for visit in visits %}
                 <tr class="regular-row" id="item-{{ visit.id }}">
                     <td><img class="btn btn-remove" src="{{ url_for('.static', filename='img/icon-remove.svg') }}" alt="Remove"></td>
+                    <td>{{ visit.id }}</td>
                     <td>{{ visit.date_of_visit }}</td>
                     <td>{{ visit.time_of_visit }}</td>
                     <td>{{ visit.doctor }}</td>

@@ -213,10 +213,12 @@ def user_diagnosis():
             diagnosis_id = edit_diagnosis_form.id.data
             diagnosis_to_edit = Diagnosis.query.filter_by(id=diagnosis_id).first()
 
+            diagnosis_to_edit.id = edit_diagnosis_form.id.data
             diagnosis_to_edit.symptoms = edit_diagnosis_form.symptoms.data
             diagnosis_to_edit.recommendation = edit_diagnosis_form.recommendation.data
             diagnosis_to_edit.prescribed_medication = edit_diagnosis_form.prescribed_medication.data
 
+         
             db.session.commit()
 
         elif delete_record_form.validate_on_submit():
@@ -234,7 +236,7 @@ def user_diagnosis():
             db.session.commit()
 
     diagnosis = Diagnosis.query.join(Visit).join(Patient).filter_by(name=session['username']).all()
-    diagnosis_header = ['', 'wizyta', 'objawy', 'zalecenia', 'recepta', '']
+    diagnosis_header = ['', 'id', 'wizyta', 'objawy', 'zalecenia', 'recepta', '']
 
     return render_template('user_diagnosis.html', diagnosis=diagnosis, diagnosis_form=diagnosis_form,
                            diagnosis_header=diagnosis_header, delete_record_form=delete_record_form,
@@ -260,9 +262,8 @@ def user_visits():
         elif delete_record_form.validate_on_submit():
             visit_id = delete_record_form.id.data
             visit_to_delete = Visit.query.filter_by(id=visit_id).first()
-            diagnosis_in_visit = Diagnosis.query.filter_by(visit_id=visit_id).first()
 
-            db.session.delete(diagnosis_in_visit)
+            db.session.delete(visit_to_delete)
             db.session.commit()
 
         elif visit_form.validate_on_submit():
@@ -274,7 +275,7 @@ def user_visits():
         print('Błąd formularza')
 
     visits = Visit.query.join(Patient).filter(Patient.name == session['username']).all()
-    visit_header = ['', 'data', 'godzina', 'lekarz', '']
+    visit_header = ['', 'id', 'data', 'godzina', 'lekarz', '']
 
     return render_template('user_visits.html', visit_form=visit_form, visits=visits,
                            visit_header=visit_header, delete_record_form=delete_record_form,
