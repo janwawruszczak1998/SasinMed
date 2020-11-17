@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from flask import session
 from .models import Administrator, Visit, Patient, Diagnosis, Doctor
 from wtforms import StringField, PasswordField, SelectField, BooleanField, HiddenField
+from wtforms.widgets import HiddenInput
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import InputRequired, Optional, EqualTo
 from wtforms.fields.html5 import IntegerField, DateField, TimeField
@@ -23,6 +24,12 @@ class RegisterAdminForm(FlaskForm):
     confirm = PasswordField('Repeat Password',  render_kw={"placeholder": "Repeat password"})
     special_key = PasswordField('admin code', validators=[InputRequired()],  render_kw={"placeholder": "Special key"})
 
+class SearchForm(FlaskForm):
+    phrase = StringField(render_kw={"placeholder": "Enter the search phrase or leave the field empty"})
+    category = SelectField(render_kw={"placeholder": "Choose the category you want to search in"}, choices=[
+        ('Patient', 'Pacjent'),
+        ('Doctor', 'Lekarz')], validators=[InputRequired()])
+
 
 class RegisterUserForm(FlaskForm):
     username = StringField('username', validators=[InputRequired()], render_kw={"placeholder": "Login"})
@@ -37,47 +44,26 @@ class RegisterUserForm(FlaskForm):
     birth_date = DateField('birth_date', validators=[InputRequired()], render_kw={"placeholder": "Data urodzenia"})
 
 
-class SearchForm(FlaskForm):
-    category = SelectField(render_kw={"placeholder": "Choose the category you want to search in"}, choices=[
-        ('Patient', 'Pacjent'),
-        ('Doctor', 'Lekarz')], validators=[InputRequired()])
-
-
-class FilterForm(FlaskForm):
-    text = StringField(render_kw={"placeholder": "Enter a phrase to filter"})
-
-
-class AddFuneralForm(FlaskForm):
+class AddVisitForm(FlaskForm):
     date_of_visit = DateField('Data wizyty', validators=[InputRequired()])
     time_of_visit = TimeField('Czas wizyty', validators=[InputRequired()])
-    doctor = QuerySelectField('doctor', query_factory=lambda: Doctor.query.all(), validators=[InputRequired()])
+    doctor = QuerySelectField('Lekarz', query_factory=lambda: Doctor.query.all(), validators=[InputRequired()])
     
-class AddBuriedForm(FlaskForm):
+class AddDiagnosisForm(FlaskForm):
     visit = QuerySelectField('Wizyta', query_factory=lambda: Visit.query.all(), validators=[InputRequired()])
-    symptoms = StringField(render_kw={"placeholder": "Objawy"})
-    recommendation = StringField(render_kw={"placeholder": "Zalecenia"})
-    prescribed_medication = StringField(render_kw={"placeholder": "Recepta"})
+    symptoms = StringField('Objawy', render_kw={"placeholder": "Objawy"})
 
 
 class DeleteRecordForm(FlaskForm):
-    id = IntegerField('ID', validators=[InputRequired()])
+    id = IntegerField('ID', widget=HiddenInput(), validators=[InputRequired()])
 
 
-class EditBuriedForm(AddBuriedForm):
-    id = IntegerField('ID', validators=[InputRequired()])
-    symptoms = StringField(render_kw={"placeholder": "Objawy"}, validators=[InputRequired()])
-    recommendation = StringField(render_kw={"placeholder": "Zalecenia"}, validators=[InputRequired()])
-    prescribed_medication = StringField(render_kw={"placeholder": "Recepta"}, validators=[InputRequired()])
+class EditDiagnosisForm(FlaskForm):
+    id = IntegerField('ID', widget=HiddenInput(), validators=[InputRequired()])
+    symptoms = StringField('Objawy', render_kw={"placeholder": "Objawy"})
 
- 
-
-
-class EditFuneralForm(AddFuneralForm):
-    id = IntegerField('ID', validators=[InputRequired()])
-    date_of_visit = DateField('Data wizyty', validators=[InputRequired()])
-    time_of_visit = TimeField('Czas wizyty', validators=[InputRequired()])
-    visible = BooleanField('widocznosc', validators=[InputRequired()])
-    doctor = QuerySelectField('doctor', query_factory=lambda: Doctor.query.all(), validators=[InputRequired()])
+class EditVisitForm(AddVisitForm):
+    id = IntegerField('ID', widget=HiddenInput(), validators=[InputRequired()])
 
 class EditUserForm(FlaskForm):
     name = StringField('Imię', validators=[InputRequired()])

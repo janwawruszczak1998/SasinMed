@@ -21,11 +21,13 @@ const UIcontroller = (function () {
 
     return {
         setModalBoxValues: function (event) {
-            let item, itemID, itemDate, itemTotalPrice;
+            let item, itemID, itemDate, itemTime, itemDoctor;
 
             item = event.target.parentNode.parentNode;
             itemID = item.id.split('-')[1];
             itemDate = item.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
+            itemTime = itemDate.nextSibling.nextSibling;
+            itemDoctor = itemTime.nextSibling.nextSibling;
 
             if (event.target.className === "btn btn-edit") {
                 document.querySelector(DOMstrings.inputItemEditID).value = itemID;

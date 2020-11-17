@@ -15,9 +15,10 @@
             <h3>Modyfikuj wizytę</h3>
             <form class="form-edit" method="POST" action="{{ url_for('user_visits') }}">
                 {{ edit_visit_form.csrf_token }}
+                {{ edit_visit_form.id(class="input-edit-id field") }}
                 {{ edit_visit_form.date_of_visit.label(class="label") }} {{ edit_visit_form.date_of_visit(class="input-edit-date field") }}
-                {{ edit_visit_form.time_of_visit.label(class="label") }} {{ edit_visit_form.time_of_visit(class="input-edit field") }}
-                {{ edit_visit_form.doctor.label(class="label") }} {{ edit_visit_form.doctor(class="input-edit field") }}
+                {{ edit_visit_form.time_of_visit.label(class="label") }} {{ edit_visit_form.time_of_visit(class="input-edit-time field") }}
+                {{ edit_visit_form.doctor.label(class="label") }} {{ edit_visit_form.doctor(class="input-edit-doctor field") }}
                 <button type="submit" class="btn btn-add btn-modal-item btn-edit-item">Edytuj</button>
             </form>
         </div>
@@ -27,7 +28,7 @@
             <h3>Potwierdzenie usunięcia</h3>
             <form method="POST" action="{{ url_for('user_visits') }}">
                 {{ delete_record_form.csrf_token }}
-                {{ delete_record_form.id.label(class="label") }} {{ delete_record_form.id(class="input-delete-id field") }}
+                {{ delete_record_form.id(class="input-delete-id field") }}
                 <button type="submit" class="btn btn-add btn-modal-item btn-delete-item">Usuń</button>
             </form>
         </div>

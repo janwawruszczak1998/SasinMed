@@ -26,7 +26,7 @@ const UIcontroller = (function () {
 
             item = event.target.parentNode.parentNode;
             itemID = item.id.split('-')[1];
-            itemSymptoms = item.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
+            itemSymptoms = item.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
             itemRecomendation = itemSymptoms.nextSibling.nextSibling;
             itemPrescribedMedication = itemRecomendation.nextSibling.nextSibling;
 

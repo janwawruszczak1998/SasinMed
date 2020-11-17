@@ -22,7 +22,6 @@ def home_page():
 
 @app.route('/search', methods=['GET'])
 def search():
-    form = FilterForm()
     resource = request.query_string
 
     table = Visit
@@ -67,8 +66,7 @@ def search():
 
     print(query_records)
 
-    return render_template('search.html', column_names=column_names, query_records=query_records, resource=resource,
-                           form=form)
+    return render_template('search.html', column_names=column_names, query_records=query_records, resource=resource)
 
 
 @app.route('/search/<string:resource>/filter', methods=['GET'])
@@ -204,8 +202,8 @@ def dashboard():
 @check_logged_in_user
 def user_diagnosis():
     delete_record_form = DeleteRecordForm()
-    diagnosis_form = AddBuriedForm()
-    edit_diagnosis_form = EditBuriedForm()
+    diagnosis_form = AddDiagnosisForm()
+    edit_diagnosis_form = EditDiagnosisForm()
 
     if request.method == 'POST':
         if edit_diagnosis_form.validate_on_submit():
@@ -215,9 +213,6 @@ def user_diagnosis():
 
             diagnosis_to_edit.id = edit_diagnosis_form.id.data
             diagnosis_to_edit.symptoms = edit_diagnosis_form.symptoms.data
-            diagnosis_to_edit.recommendation = edit_diagnosis_form.recommendation.data
-            diagnosis_to_edit.prescribed_medication = edit_diagnosis_form.prescribed_medication.data
-
          
             db.session.commit()
 
@@ -246,9 +241,9 @@ def user_diagnosis():
 @app.route('/dashboard/visits', methods=['GET', 'POST'])
 @check_logged_in_user
 def user_visits():
-    visit_form = AddFuneralForm()
+    visit_form = AddVisitForm()
     delete_record_form = DeleteRecordForm()
-    edit_visit_form = EditFuneralForm()
+    edit_visit_form = EditVisitForm()
 
     if request.method == 'POST':
         if edit_visit_form.validate_on_submit():
@@ -256,7 +251,7 @@ def user_visits():
             visit_to_edit = Visit.query.filter_by(id=visit_id).first()
             visit_to_edit.date_of_visit = edit_visit_form.date_of_visit.data
             visit_to_edit.time_of_visit = edit_visit_form.time_of_visit.data
-            visit_to_edit.visible = edit_visit_form.visible
+            visit_to_edit.doctor_id = edit_visit_form.doctor.data.id
             db.session.commit()
 
         elif delete_record_form.validate_on_submit():
@@ -271,8 +266,6 @@ def user_visits():
             db.session.add(new_visit)
             db.session.commit()
 
-    else:
-        print('Błąd formularza')
 
     visits = Visit.query.join(Patient).filter(Patient.name == session['username']).all()
     visit_header = ['', 'id', 'data', 'godzina', 'lekarz', '']
