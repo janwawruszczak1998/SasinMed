@@ -7,9 +7,9 @@
 {% block content %}
 
     <div class="container">
-        <h1 class="greeting">Welcome {{ session['username'] }}, we wish you a pleasant day!</h1>
+        <h1 class="greeting">Witaj, {{ session['username'] }}, życzymy ci miłego dnia!</h1>
 
-        <h2 class="edit-title">Here you can edit data of your company:</h2>
+        <h2 class="edit-title">Tutaj możesz edytować swoje dane osobowe:</h2>
 
         <div class="form-box">
             <form class="form-edit" method="POST" action="{{ url_for('dashboard') }}">
