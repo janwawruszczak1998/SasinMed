@@ -213,22 +213,25 @@ def user_diagnosis():
 
             diagnosis_to_edit.id = edit_diagnosis_form.id.data
             diagnosis_to_edit.symptoms = edit_diagnosis_form.symptoms.data
-         
+            print("edycja diagnozy")
+            print(edit_diagnosis_form.errors)
             db.session.commit()
 
         elif delete_record_form.validate_on_submit():
             diagnosis_id = delete_record_form.id.data
             diagnosis_to_delete = Diagnosis.query.filter_by(id=diagnosis_id).first()
-
+            
+            print("usuwanie diagnozy")
+            print(delete_record_form.errors)
+            
             db.session.delete(diagnosis_to_delete)
             db.session.commit()
 
-        elif diagnosis_form.validate_on_submit():
-            new_diagnosis = Diagnosis(visit_id=diagnosis_form.visit.data.id, symptoms=diagnosis_form.symptoms.data, 
-                                recommendation=diagnosis_form.recommendation.data,
-                                prescribed_medication=diagnosis_form.prescribed_medication.data)
-            db.session.add(new_diagnosis)
-            db.session.commit()
+        # elif diagnosis_form.validate_on_submit():
+        #     new_diagnosis = Diagnosis(visit_id=diagnosis_form.visit.data.id, symptoms=diagnosis_form.symptoms.data)
+        #     db.session.add(new_diagnosis)
+        #     db.session.commit()
+        #     print("dodanie diagnozy")
 
     diagnosis = Diagnosis.query.join(Visit).join(Patient).filter_by(name=session['username']).all()
     diagnosis_header = ['', 'id', 'wizyta', 'objawy', 'zalecenia', 'recepta', '']
@@ -252,11 +255,16 @@ def user_visits():
             visit_to_edit.date_of_visit = edit_visit_form.date_of_visit.data
             visit_to_edit.time_of_visit = edit_visit_form.time_of_visit.data
             visit_to_edit.doctor_id = edit_visit_form.doctor.data.id
+
+            print("edycja visyty")
+
             db.session.commit()
 
         elif delete_record_form.validate_on_submit():
             visit_id = delete_record_form.id.data
             visit_to_delete = Visit.query.filter_by(id=visit_id).first()
+
+            print("usuniecie visyty")
 
             db.session.delete(visit_to_delete)
             db.session.commit()
@@ -264,6 +272,8 @@ def user_visits():
         elif visit_form.validate_on_submit():
             new_visit = Visit(visible=False,  patient_id=session['patient_id'], doctor_id=visit_form.doctor.data.id, date_of_visit=visit_form.date_of_visit.data, time_of_visit=visit_form.time_of_visit.data)
             db.session.add(new_visit)
+            print("dodanie vizyty")
+
             db.session.commit()
 
 

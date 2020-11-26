@@ -26,8 +26,8 @@ const UIcontroller = (function () {
             item = event.target.parentNode.parentNode;
             itemID = item.id.split('-')[1];
             itemDate = item.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
-            itemTime = itemDate.nextSibling.nextSibling;
-            itemDoctor = itemTime.nextSibling.nextSibling;
+            itemTime = itemDate.nextSibling.nextSibling.nextSibling;
+            itemDoctor = itemTime.nextSibling.nextSibling.nextSibling;
 
             if (event.target.className === "btn btn-edit") {
                 document.querySelector(DOMstrings.inputItemEditID).value = itemID;
