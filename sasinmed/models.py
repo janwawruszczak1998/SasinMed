@@ -29,7 +29,7 @@ class Doctor(db.Model):
     visit = relationship("Visit", back_populates="doctor")
 
     def __repr__(self):
-        return f'Doktor {self.name} {self.surname}, {self.specialization}'
+        return f'Lekarz {self.name} {self.surname}, {self.specialization}'
 
 class Visit(db.Model):
     # connected with Doctor zero-or-many-to-one

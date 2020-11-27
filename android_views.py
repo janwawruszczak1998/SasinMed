@@ -31,6 +31,8 @@ def mobile_search():
 
     for record in records:
         row = {}
+        if not record.__dict__["visible"]:
+            continue
         for column_name in column_names:
             data = record.__dict__[column_name]
             if data is not None and data != "":
@@ -41,7 +43,7 @@ def mobile_search():
                 row[column_name] = str(data)
             else:
                 row[column_name] = "brak"
-
+        row.pop("visible")
         row["patient"] = row.pop("patient_id")
         row["doctor"] = row.pop("doctor_id")
         row["dateOfVisit"] = row.pop("date_of_visit")
