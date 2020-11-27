@@ -26,13 +26,11 @@ def mobile_search():
     except ValueError:
         pass
 
-    records = table.query.all()
+    records = table.query.filter_by(visible=True).order_by(table.date_of_visit).order_by(table.time_of_visit).all()
     query_records = []  # list of dictionaries (dict = record) to store in session
 
     for record in records:
         row = {}
-        if not record.__dict__["visible"]:
-            continue
         for column_name in column_names:
             data = record.__dict__[column_name]
             if data is not None and data != "":

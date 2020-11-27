@@ -37,8 +37,7 @@ def search():
     except ValueError:
         pass
 
-
-    records = table.query.all()
+    records = table.query.order_by(table.date_of_visit).order_by(table.time_of_visit).all()
     query_records = []  # list of dictionaries (dict = record) to store in session
 
     for record in records:
